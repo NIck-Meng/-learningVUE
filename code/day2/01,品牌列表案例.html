@@ -25,7 +25,7 @@
               <div class="panel-body form-inline">
                     <label>
                         ID:
-                        <input type='text' class="form-control" v-model="id">
+                        <input type='text' class="form-control" v-model="id" v-fontsize='50'>
                     </label>
                     <label>
                         NAME:
@@ -203,6 +203,10 @@
                 bind:function(el,bindding){
                     el.style.fontWeight=bindding.value
                 }
+            },
+            'fontsize':function(el,binding){
+                el.style.fontsize=binding.value
+
             }
 
 

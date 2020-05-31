@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+
+    <!-- <导入vue包> -->
+    <script src="../lib/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<body>
+    <div id="app"> 
+        <input type="button" value="修改msg" @click="msg='no'">
+        <h3 id="h3">{{msg}}</h3>
+       
+
+    </div>
+
+
+
+    <script>
+        //创建vue实例
+        var app=new Vue({
+            el:"#app",  //表示当前对象要控制页面上的区域
+            data:{   //存放el中要用到的数据
+                msg:"ok"
+            },
+            methods:{
+                show(){
+                    console.log("show func")
+                }
+
+
+
+            },
+            beforeCreate(){
+                //第一个生命周期函数，实例对象被创建出来前执行的代码,data,methods都还没有被初始化
+                // console.log(this.msg)
+                // this.show()
+            },
+            created(){
+                //第二个生命周期函数：data,methods被初始化好了
+                this.show()
+            },
+            beforeMount(){
+                //第三个生命周期函数，模版编译完成，但尚未渲染到页面
+                console.log(document.getElementById("h3").innerText)
+            },
+            mounted(){
+                //第四个生命周期函数，模版已经渲染好页面，是最后一个周期函数
+                console.log(document.getElementById("h3").innerText)
+
+            },
+            beforeUpdated(){
+                //运行中事件，此时，界面还未更新，数据被更新了
+                console.log(document.getElementById("h3").innerText)
+                console.log(this.msg)
+            },
+            updated(){
+                //页面上数据和内存中数据同步完毕
+                console.log(document.getElementById("h3").innerText)
+                console.log(this.msg)
+            }
+            
+
+
+        })
+    
+    </script>
+    
+</body>
+</html>
