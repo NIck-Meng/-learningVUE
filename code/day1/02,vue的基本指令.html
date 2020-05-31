@@ -10,12 +10,12 @@
     [v-cloak]{
         display:none;
     }
-    
+
     </style>
 
     <!-- <导入vue包> -->
-    <!-- <script src="lib/"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./lib/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
 </head>
 <body>
     <div id="app"> 
@@ -29,6 +29,14 @@
         <h4 v-text="message"></h4>
         <h4 v-text="msg2"></h4>
         <h4 v-html="msg2"></h4>
+
+        <input type="button" value="按钮" v-bind:title="mytitle+'123'">   //v-bind绑定属性,当做表达式来解析
+        <input type="button" value="按钮" :title="mytitle+'123'">   //简写形式
+
+        <input type="button" value="按钮" :title="mytitle+'123'" v-on:click="show">    //v-on绑定事件
+        <input type="button" value="按钮" :title="mytitle+'123'" @click="show">    //简写形式
+
+
     </div>
 
 
@@ -39,7 +47,18 @@
             el:"#app",  //表示当前对象要控制页面上的区域
             data:{   //存放el中要用到的数据
                 message:"欢迎学习vue",  //通过vue提供的指令很容易就能把数据渲染到页面上，无需操作DOM元素
-                msg2:"<h1>我是一个大大的</h1>"
+                msg2:"<h1>我是一个大大的</h1>",
+                mytitle:"我自己定义的title"
+
+            },
+            methods:{  //定义对象中的方法
+                show:function(){
+                    alert("hello");
+                }
+
+
+
+
 
             }
         })

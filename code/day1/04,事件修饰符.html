@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .inner{
+            height: 150px;
+            background-color: aqua;
+
+        }
+
+
+    </style>
+
+
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app"> 
+       <!-- <div class="inner" @click.capture="divHandler"> -->
+        <div class="inner" @click.self="divHandler">
+            <input type="button" value="戳他" @click.stop="btnHandler">  
+            <!-- capture捕获触发 -->
+            <!-- stop阻止冒泡 -->
+            <!-- self当前元素才会触发,只会阻止自身行为，不会阻止其他的行为 -->
+       </div>
+
+       <a href="http://www.baidu.com" @click.prevent.once="linkClick">去百度</a>
+        <!-- prevent阻止默认行为 -->
+        <!-- once只触发一次 -->
+
+
+    </div>
+
+
+
+    <script>
+
+        var app=new Vue({
+            el:"#app",  //表示当前对象要控制页面上的区域
+            data:{   //存放el中要用到的数据
+              
+
+            },
+            methods:{  
+                divHandler(){
+                    console.log("inner div")
+                },
+                btnHandler(){
+                    console.log("btn")
+                },
+                linkClick(){
+                    console.log("linkclick")
+                }
+
+            }
+        })
+    
+    </script>
+    
+</body>
+</html>

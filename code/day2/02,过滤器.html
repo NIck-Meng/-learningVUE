@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+
+    <!-- <导入vue包> -->
+    <script src="../lib/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<body>
+    <div id="app"> 
+       <p>{{msg|msgFormat}}</p>
+
+    </div>
+
+
+
+    <script>
+         //全局过滤器定义语法
+        Vue.filter("msgFormat",function(data){return data.replace("纯洁","邪恶")})
+
+        //创建vue实例
+        var app=new Vue({
+            el:"#app",  //表示当前对象要控制页面上的区域
+            data:{   //存放el中要用到的数据
+                msg:"我曾经是个纯洁的男孩"
+              
+            },
+            methods:{  //定义对象中的方法
+
+            },
+            filters:{  //私有过滤器,优先调用私有，否则调用全局过滤器
+                dateFormat:function(data,pattern){
+                    var dt=new Date(datestr);
+                    var y=dt.getFullYear()
+                    var m=dt.getMonth()+1
+                    var d=dt.getDate()
+                    return `${y}-${m}-${d}`
+                 }
+
+
+
+
+
+            }
+        });
+           
+    </script>
+    
+</body>
+</html>
