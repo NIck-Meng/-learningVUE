@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+
+    <!-- <导入vue包> -->
+    <script src="../lib/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<body>
+    <div id="app"> 
+      <!-- <a href="" value="登陆"  @click.prevent="flag=true">登陆</a>
+      <a href="" value="注册"  @click.prevent="flag=false">注册</a> -->
+      <!-- 方法一 -->
+      <!-- <login v-if="flag"></login>
+      <register v-else="flag"></register> -->
+
+
+      <a href="" value="登陆" @click.prevent="compName='login'" >登陆</a>
+      <a href="" value="注册" @click.prevent="compName='register'" >注册</a>
+      <!-- component来展示对应的组件，is属性为要展示的组件名称 -->
+      <component :is="compName"></component>
+
+
+
+
+    </div>
+
+
+
+    <script>
+       
+       
+         Vue.component("login",{
+             template:"<h3>登陆组件</h3>"
+         })
+         Vue.component("register",{
+             template:"<h3>注册组件</h3>"
+         })
+     
+        //创建vue实例
+        var app=new Vue({
+            el:"#app",  //表示当前对象要控制页面上的区域
+            data:{   //存放el中要用到的数据
+                flag:true,
+                compName:''
+              
+
+            },
+           methods:{  //定义对象中的方法
+           },
+           filters:{},
+           directives:{}
+
+        })
+    
+    </script>
+    
+</body>
+</html>

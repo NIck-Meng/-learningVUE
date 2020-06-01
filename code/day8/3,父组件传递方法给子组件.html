@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <template id="tmpl">
+            <div>
+                <h1>这是子组件</h1>
+                <input type="button" value="这是子组件按钮" @click="myclick">
+            </div>
+
+        </template>
+        <!-- 用事件绑定机制给子组件传递方法 -->
+        <com2 v-on:func="show"></com2>
+
+
+    </div>
+
+    <script>
+        var com2={
+            template:'#tmpl',
+            methods:{
+                myclick(){
+                    this.$emit('func')
+
+                }
+            }
+        }
+
+
+
+
+        var app=new Vue({
+            el:"#app",
+            data:{},
+            methods:{
+                show(){
+                    console.log("父组件的show")
+                }
+
+                
+            },
+            components:{
+                com2
+            }
+
+
+
+        })
+
+
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+
+    <!-- <导入vue包> -->
+    <script src="../lib/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<body>
+    <div id="app"> 
+        {{msg}}
+        <mycom1></mycom1> 
+        <mycom2></mycom2>
+        <template id="tmp1">
+            <h1>这是template外部组建{{msg}}</h1>
+        </template>
+
+        <!-- 在引用子组件的时候，父组件通过属性绑定形式来给子组件传递数据 -->
+        <login :parent="msg2"></login>
+       
+
+    </div>
+
+
+
+    <script>
+        //全局组建定义
+        //方法1：extend
+         var com1=Vue.extend({
+             template:'<h3>这是extend</h3>'
+         })
+         Vue.component("mycom1",com1)
+        // 方法二：
+         Vue.component("mycom2",{
+             template:"<h3>这是component</h3>"
+         })
+         //方法三：
+         Vue.component("mycom3",{
+             template:"#tmp1",
+             data:function(){  //组件的data必须是一个返回对象的函数
+                 return {msg:"组件的数据"}
+             }
+         })
+     
+        //创建vue实例
+        var app=new Vue({
+            el:"#app",  //表示当前对象要控制页面上的区域
+            data:{   //存放el中要用到的数据
+                msg:"hello",
+                msg2:"父组件中数据"
+              
+
+            },
+           methods:{  //定义对象中的方法
+           },
+           filters:{},
+           directives:{},
+           components:{ //实例对象内部组建,子组件默认无法访问父组件的属性和方法
+               'login':{
+                   template:"<h3>子组件-----{{parent}}</h3>",
+                   props:['parent'],  //父组件传递的属性重新定义
+                   data:{} //data中数据可读可写，props中只读
+               }
+
+           }
+        })
+    
+    </script>
+    
+</body>
+</html>
