@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+
+    <!-- <导入vue包> -->
+    <script src="../lib/vue.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap.css" >
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<body>
+    <div id="app"> 
+
+        <cmt-box @func="loadComments"></cmt-box>
+        
+        <ul class="list-group">
+            <li class="list-group-item" v-for="item in list" :key="item.id">
+                <span class="badge">评论人：{{item.user}}</span>
+                {{item.content}}
+            </li>
+           
+        </ul>
+        
+       
+
+    </div>
+
+    <template id="tmp1">
+        <div>
+            <div class="form-group">
+                <label>评论人:</label>
+                <input type="text" class="form-control" v-model="user">
+
+            </div>
+
+            <div class="form-group">
+                <label>评论内容:</label>
+                <textarea class="form-control"></textarea v-model="content">
+
+            </div>
+
+            <div class="form-group">
+               <input type="button" value="提交" class="btn btn-primary" @click="postcomment">
+
+            </div>
+        </div>
+    </template>
+
+
+
+    <script>
+
+        var commentBox={
+            data:function(){
+                return {user:'',content:''}
+            },
+            template:"#tmp1",
+            methods:{
+                postcomment(){
+                    //数据存放在localstorage，只支持存放字符串对象
+                    //
+                    var comment={id:Date.now(),user:this.user,content:this.comtent}
+                    var list=JSON.parse(localStorage.getItem("cmts") || '[]')
+                    list.unshift(comment)
+                    localStorage.setItem('cmts',JSON.stringify(list))
+                    this.user=this.comtent=''
+                    this.$emit("func")
+
+                }
+            }
+
+        }
+
+
+
+
+        //创建vue实例
+        var app=new Vue({
+            el:"#app",  //表示当前对象要控制页面上的区域
+            data:{   //存放el中要用到的数据
+                list:[
+                    {
+                        id:Date.now(),
+                        user:"李白",
+                        content:"我是天才"
+                    },
+                    {
+                        id:Date.now(),
+                        user:"杜甫",
+                        content:"我是天才"
+                    },
+                    {
+                        id:Date.now(),
+                        user:"杜牧",
+                        content:"我是天才"
+                    }
+                ]
+              
+
+            },
+            methods:{  //定义对象中的方法
+                loadComments:function(){ //从localstorage加载数据
+                    var list=JSON.parse(localStorage.getItem("cmts") || '[]')
+                    this.list=list
+
+                }
+
+            },
+            components:{
+               'cmt-box': commentBox
+            },
+            created(){
+                this.loadComments()
+            }
+        })
+    
+    </script>
+    
+</body>
+</html>

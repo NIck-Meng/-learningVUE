@@ -11,7 +11,7 @@
         <template id="tmpl">
             <div>
                 <h1>这是子组件</h1>
-                <input type="button" value="这是子组件按钮" @click="myclick">
+                <input type="button" value="这是子组件按钮，点击会调用父组件的func方法" @click="myclick">
             </div>
 
         </template>
@@ -26,9 +26,12 @@
             template:'#tmpl',
             methods:{
                 myclick(){
-                    this.$emit('func')
+                    this.$emit('func',this.msg2)  //this代码当前组件对象，emit表示触发
 
                 }
+            },
+            data:function(){
+                return {msg2:"小头儿子"}
             }
         }
 
@@ -37,10 +40,13 @@
 
         var app=new Vue({
             el:"#app",
-            data:{},
+            data:{
+                dataFromSon:null
+            },
             methods:{
-                show(){
-                    console.log("父组件的show")
+                show(dt){
+                    console.log("调用父组件的show"+dt)
+                    this.dataFromSon=dt   //子组件向父组件传值
                 }
 
                 
