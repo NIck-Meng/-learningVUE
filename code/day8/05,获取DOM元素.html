@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+
+    <!-- <导入vue包> -->
+    <script src="../lib/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<body>
+    <div id="app"> 
+        <input type="button" value="点击元素" @click="getElement" ref="mybutton">
+        <h3 id="eles" ref="eles3">今天太开心了</h3>
+
+        <login ref="mylogin"></login>
+       
+
+    </div>
+
+
+
+    <script>
+
+        var login={
+            template:"<h1>登陆</h1>",
+            data(){
+                return {msg:"hello"}
+            }
+        }
+
+
+
+        //创建vue实例
+        var app=new Vue({
+            el:"#app",  //表示当前对象要控制页面上的区域
+            data:{   //存放el中要用到的数据
+              
+
+            },
+            methods:{  //定义对象中的方法
+                getElement(){
+                    // console.log(document.getElementById("eles").innerText)
+                    // console.log(this.$refs.eles3.innerText)
+                    console.log(this.$refs.mylogin.msg)
+                }
+
+            },
+            components:{
+                login
+            }
+        })
+    
+    </script>
+    
+</body>
+</html>

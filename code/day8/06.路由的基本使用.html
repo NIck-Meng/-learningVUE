@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+
+    <!-- <导入vue包> -->
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vue-router.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<body>
+    <div id="app"> 
+        <!-- <a href="#/login">登陆</a>
+        <a href="#/register">注册</a> -->
+
+        <router-view to="/login">登陆</router-view>
+        <router-view to="/register">注册</router-view>
+
+
+        <router-view></router-view>
+
+    </div>
+
+
+
+    <script>
+
+        var login={
+            template:"<h1>登陆</h1>"
+        }
+        var register={
+            template:"<h1>注册</h1>"
+        }
+
+        var routerobj=new VueRouter({
+            routes:[
+                {path:'/login',component:login},
+                {path:'/register',component:register}
+
+
+            ]
+        })
+
+
+
+        //创建vue实例
+        var app=new Vue({
+            el:"#app",  //表示当前对象要控制页面上的区域
+            data:{   //存放el中要用到的数据
+              
+
+            },
+            methods:{  //定义对象中的方法
+                router:routerobj  //将路由注册到实例对象上
+
+            }
+        })
+    
+    </script>
+    
+</body>
+</html>
