@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+        html,body{
+            margin:0;
+            padding:0
+        }
+
+
+        .header{
+            background-color: orange;
+            height: 80px;
+        }
+        .h1{
+            margin: 0;
+            padding: 0;
+            font-size: 30px;
+        }
+
+        .container{
+            display: flex;
+
+        }
+        .left{
+            background-color:lightgreen;
+            flex:2;
+            height:600px
+        }
+        .main{
+            background-color:lightsalmon;
+            flex:8;
+            height: 600px;
+        }
+
+    </style>
+
+    <!-- <导入vue包> -->
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vue-router.js"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<body>
+    <div id="app"> 
+        <router-view></router-view>
+        <div class="container">
+            <router-view name="left"></router-view>
+            <router-view name="main"></router-view>
+
+        </div>
+       
+
+    </div>
+
+
+
+    <script>
+        var header={
+            template:"<h1 class='header'>header头部区域</h1>"
+        }
+        var leftBox={
+            template:"<h1 class='left'>left侧边栏</h1>"
+        }
+        var mainBox={
+            template:"<h1 class='main'>mainBox主体区域</h1>"
+        }
+        var router=new VueRouter({
+            routes:[
+                {path:'/',components:{
+                    'default':header,
+                    'left':leftBox,
+                    'main':mainBox
+                }}
+              
+            ]
+        })
+
+
+        //创建vue实例
+        var app=new Vue({
+            el:"#app",  //表示当前对象要控制页面上的区域
+            data:{   //存放el中要用到的数据
+              
+
+            },
+            methods:{  //定义对象中的方法
+            },
+            router:router
+        })
+    
+    </script>
+    
+</body>
+</html>

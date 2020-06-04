@@ -7,6 +7,27 @@
     <title>Document</title>
 
     <style>
+        .router-link-active, .myactive {
+            color:red;
+            font-weight:800;
+            font-style:italic;
+            text-decoration: underline;
+            background-color: green;
+
+        }
+
+        .v_enter,
+        .v-leave{
+            opacity:0 ;
+            transform: translateX(140px);
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.5s ease;
+        }
+
+   
 
     </style>
 
@@ -20,12 +41,13 @@
         <!-- <a href="#/login">登陆</a>
         <a href="#/register">注册</a> -->
 
-        <router-view to="/login">登陆</router-view>
-        <router-view to="/register">注册</router-view>
+        <router-link to="/login" tag="span">登陆</router-link> 
+        <router-link to="/register/10">注册</router-link>
+        <!-- 默认渲染a标签 -->
 
-
-        <router-view></router-view>
-
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 
 
@@ -33,19 +55,27 @@
     <script>
 
         var login={
-            template:"<h1>登陆</h1>"
+            template:"<h1>登陆---{{$route.query.id}}</h1>",
+            created(){
+                console.log(this.$route.query.id)
+            }
         }
         var register={
-            template:"<h1>注册</h1>"
+            template:"<h1>注册---{{$route.params.id}}</h1>",
+            created(){
+                console.log(this.$route.params.id)
+            }
         }
 
         var routerobj=new VueRouter({
             routes:[
                 {path:'/login',component:login},
-                {path:'/register',component:register}
+                {path:'/register/:id',component:register},
+                {path:'/',redirect:'/login'}  
 
 
-            ]
+            ],
+            linkActiveClass:'myactive'
         })
 
 
@@ -58,9 +88,10 @@
 
             },
             methods:{  //定义对象中的方法
-                router:routerobj  //将路由注册到实例对象上
+                
 
-            }
+            },
+            router:routerobj  //将路由注册到实例对象上
         })
     
     </script>
