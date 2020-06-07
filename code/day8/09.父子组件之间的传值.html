@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+
+    <!-- <导入vue包> -->
+    <script src="../lib/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<body>
+    <div id="app"> 
+        <com1 v-bind:parentmes="msg" @func="getMsgFromSon"></com1>
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <h1>这是子元素--- {{ parentmes }}</h1>
+            <input type="button" value="惦记我" @click="sendMsg">
+        </div>
+    </template>
+
+    <script>
+
+        var com1={
+            template:"#tmpl",
+            props:['parentmes'],
+            date(){
+                return {
+                    msg:"给我点钱"
+                }
+            },
+            methods:{
+                sendMsg(){
+                    this.$emit('func',this.msg)
+
+                }
+            }
+        }
+        //创建vue实例
+        var app=new Vue({
+            el:"#app",  //表示当前对象要控制页面上的区域
+            data:{   //存放el中要用到的数据
+            msg:"父组件中数据",
+            msgFromSon:""
+              
+
+            },
+            methods:{  //定义对象中的方法
+            getMsgFromSon(data){
+                this.msgFromSon=data
+                console.log(this.msgFromSon)
+
+            }
+               
+                
+
+
+
+
+
+            },
+            components:{
+                com1
+                
+            }
+        })
+    
+    </script>
+    
+</body>
+</html>

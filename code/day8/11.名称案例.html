@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+
+    <!-- <导入vue包> -->
+    <script src="../lib/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<body>
+    <div id="app"> 
+
+        <!-- <input type="text" v-model="firstname" @keyup="getFullName">+ -->
+        <input type="text" v-model="firstname">+
+        <input type="text" v-model="lastname">=
+        <input type="text" v-model="fullname">
+
+        <p>{{fullname}}</p>
+        <p>{{fullname}}</p>
+    </div>
+
+
+
+    <script>
+        //创建vue实例
+        var app=new Vue({
+            el:"#app",  //表示当前对象要控制页面上的区域
+            data:{   //存放el中要用到的数据
+            firstname:'',
+            lastname:''//,
+            // fullname:''
+              
+
+            },
+            methods:{  //定义对象中的方法
+            getFullName(){
+                this.fullname=this.firstname+this.lastname
+
+            }
+            },
+            watch:{  //监视data中指定数据变化
+                firstname:function(){
+                    console.log("firstname 变化了")
+                    this.fullname=this.firstname+this.lastname
+                },
+                lastname:function(newval,oldval){
+                    console.log("firstname 变化了")
+                    this.fullname=this.firstname+newval
+                },
+
+            },
+            computed:{//计算属性在引用时候一定不要加(),当做普通属性即可
+                'fullname':function(){
+                    console.log("ok")
+                    return this.firstname+this.lastname
+
+                }
+
+            }
+       
+        })
+    
+    </script>
+    
+</body>
+</html>
